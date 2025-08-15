@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/alecthomas/kong"
 	"github.com/gui-marc/gox/internal/compiler"
 )
@@ -19,15 +21,12 @@ func main() {
 }
 
 func (c *CLI) Run() error {
-	parser := compiler.NewParticipleParser()
-
 	input := `<div attr="value">Content</div>`
-	ast, err := parser.ParseString("", input)
-	if err != nil {
-		return err
-	}
+	parser := compiler.NewParser(input)
 
-	_ = ast
+	parsed := parser.Parse()
+
+	fmt.Println(parsed)
 
 	return nil
 }
